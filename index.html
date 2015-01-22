@@ -1,0 +1,49 @@
+<!doctype html>
+<html data-ng-csp>
+  <head>
+    <title>Pokemon Master</title>
+    <link rel="stylesheet" type="text/css" href="pokeMaster.css">  
+    <script src= "./js/angular.min.js"></script>
+  </head>
+  <body ng-app="myApp" ng-controller="myCtrl">
+    <div id="main-container">
+      <div id="title-container" class="center">BE A POKEMON MASTER</div>
+      <div id="body-container">
+        <div id="travelling" style="display:none; opacity:1;">
+          <img class="trainer" id="trainer1" src="images/trainer1.png" style="display:block">
+          <img class="trainer" id="trainer2" src="images/trainer2.png" style="display:none">
+          <div style="width:50px; display: inline-block;"></div>
+          <div class="choosen-poke-block" ng-repeat="x in me.pokemonList track by $index" ng-if="x.choosen">
+            <img class="choosen-poke-img"  ng-src="{{base_name + x.name + '.png'}}">
+          </div>
+        </div>
+        <div id="choose-starter" style="display:none; opacity:1;">
+          <div style="margin-top: 0px; text-align: center;vertical-align: middle;">Choose a starter pokemon</div>
+          <div class="starter-poke-block" ng-class="{highlightLight: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-repeat="x in starter_list | filter" ng-click="select_starter(x)">
+            <img class="starter-poke-img" ng-src="{{base_name + x.name + '.png'}}">
+          </div>
+        </div>
+        <div id="pokebag">
+          <div class="pokebag-poke-block" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-repeat="x in me.pokemonList track by $index" ng-click="" ng-class="{highlightLight: x.choosen}">
+            <img class="pokebag-poke-img" ng-src="{{base_name + x.name + '.png'}}">
+          </div>
+        </div>
+      </div>
+      <div id="opt-container">
+        <div id="left-opt" class="opt" ng-class="{highlightDark: show}" ng-mouseenter="show = true" ng-mouseleave="show = false" ng-click="click_pokebag(closed)">
+          <div id="PokeBagTitle">Poke-Bag</div>
+          <img id="pokeball" src="images/pokeball.png">
+        </div>
+        <div id="right-opt" ng-class="{highlightDark: rightShow && wild_pokemon}" ng-mouseenter="rightShow = true" ng-mouseleave= "rightShow=false" ng-click= "capture()" class="opt">
+          <div id="statusTitle">Status:</div>
+          <img style="display:none" id="status-poke-img" ng-src="{{base_name + wild_pokemon.name + '.png'}}">
+          <div id="status">{{status}}</div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="./js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="./js/pokeMaster.js"></script>
+    <script src="myApp.js"></script>
+    <script src="myCtrl.js"></script>
+  </body>
+</html>
